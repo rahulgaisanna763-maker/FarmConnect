@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FarmConnect | Fresh from local farms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<header class="topbar">
+<a class="brand" href="#" onclick="showPage('market');return false"><span class="mark">✳</span><span>farm<span class="light">connect</span><small>GROW LOCAL. BUY FRESH.</small></span></a>
+<nav><button class="nav active" data-page="market">Marketplace</button><button class="nav" data-page="dashboard">Dashboard</button></nav>
+<div class="actions"><span id="user-label">Guest</span><button class="btn outline" id="auth-button">Sign in</button><button class="btn cart" onclick="showPage('cart')">Cart <b id="cart-count">0</b></button></div>
+</header>
+<main>
+<section id="market-page" class="page">
+<section class="hero"><div><span class="eyebrow">A BETTER WAY TO BUY LOCAL</span><h1>Good food starts<br>with <em>good connections.</em></h1><p>Discover fresh produce directly from the people who grow it. Fair prices, local farms, and a shorter journey to your table.</p><button class="btn white" onclick="document.getElementById('market-grid').scrollIntoView({behavior:'smooth'})">Explore produce →</button><div class="stats"><div><b>15+</b><small>Fresh listings</small></div><div><b>5</b><small>Local farmers</small></div><div><b>100%</b><small>Farm direct</small></div></div></div><div class="hero-art"><div class="sun"></div><div class="produce"><span>JUST HARVESTED</span><div>🥬 🍅 🥕</div><b>Freshness you can taste.</b><small>Picked with care, shared with you.</small></div><aside>🌱 Supporting local growers</aside></div></section>
+<div class="section-head"><div><span class="eyebrow green">THE MARKETPLACE</span><h2>Fresh picks, fair prices.</h2><p>Browse seasonal produce from farmers near you.</p></div><span id="result-count" class="muted"></span></div>
+<div class="filters"><div class="search"><span>⌕</span><input id="search-input" placeholder="Search tomatoes, rice, mangoes..."></div><select id="category-filter"><option value="">All categories</option><option>Vegetables</option><option>Fruits</option><option>Grains</option><option>Dairy</option><option>Other</option></select><select id="location-filter"><option value="">All locations</option></select><select id="availability-filter"><option value="">Any availability</option><option value="today">Available today</option><option value="week">This week</option></select><label class="price">Max ₹<b id="price-value">500</b><input id="price-filter" type="range" min="20" max="500" value="500" step="10"></label></div>
+<div id="market-grid" class="product-grid"></div>
+</section>
+<section id="dashboard-page" class="page hidden"><div class="dash-head"><div><span class="eyebrow green">YOUR FARM DESK</span><h1 id="dashboard-title">Dashboard</h1><p id="dashboard-subtitle">Your marketplace activity at a glance.</p></div><button class="btn primary" id="add-product-button">＋ Add a listing</button></div><div id="metrics" class="metrics"></div><div class="panel"><div class="panel-head"><div><h2 id="dashboard-list-title">Your listings</h2><p>Keep availability and pricing up to date.</p></div></div><div id="dashboard-content"></div></div></section>
+<section id="cart-page" class="page hidden"><div class="section-head"><div><span class="eyebrow green">YOUR BASKET</span><h2>Ready for something fresh?</h2><p>Review your produce before sending the order request.</p></div></div><div class="cart-layout"><div class="panel" id="cart-items"></div><aside class="panel summary"><h3>Order summary</h3><div class="sumline"><span>Subtotal</span><b id="cart-subtotal">₹0</b></div><div class="sumline"><span>Delivery</span><span>Arrange with farmer</span></div><div class="sumtotal"><span>Estimated total</span><b id="cart-total">₹0</b></div><label>Pickup / delivery preference</label><select id="fulfilment"><option>Pickup from farm</option><option>Delivery (confirm with farmer)</option></select><label>Note to farmer (optional)</label><textarea id="order-note" placeholder="Preferred pickup time, ripeness, etc."></textarea><button class="btn primary full" id="place-order">Send order request</button><small>Demo payments are not collected. Pay cash on pickup or arrange directly with the farmer.</small></aside></div></section>
+</main>
+<footer><div class="brand"><span class="mark">✳</span><span>farm<span class="light">connect</span><small>GROW LOCAL. BUY FRESH.</small></span></div><p>Built for a fairer, fresher food system. © 2026 FarmConnect</p></footer>
+<div id="modal-root"></div><div id="toast" class="toast"></div>
+<script src="config.js"></script><script src="js/app.js"></script>
+</body></html>
